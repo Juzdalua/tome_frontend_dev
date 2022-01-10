@@ -1,7 +1,13 @@
+import Navbar from "./components/Navbar/Navbar";
+import Home from "./components/Home/Home";
+import "./styles.css";
+
 function App() {
   return (
-   <div>
-     
+   <div className="App">
+     <Navbar />
+     <Home />
+
    </div>
   );
 }

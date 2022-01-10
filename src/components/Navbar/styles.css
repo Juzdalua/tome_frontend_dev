@@ -1,0 +1,13 @@
+.nav-bar{
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;    
+    padding: 20px;
+    font-weight: 600;
+    font-size: 20px;    
+    display: flex;
+    justify-content: space-between;
+}
+
+.nav-bar__member > a:first-child{
+    margin-right: 10px;
+}
