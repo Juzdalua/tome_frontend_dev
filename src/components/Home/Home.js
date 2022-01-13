@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./styles.css";
 
+
 function Home(){
     const [loading, setLoding] = useState(true);
     const [toDo, setToDo] = useState("");
@@ -29,6 +30,7 @@ function Home(){
             <ul>
                 {toDos.map( (item, index) => <li key={index}>{item}</li>)}
             </ul>
+            
         </div>
     );
 };
