@@ -1,6 +1,5 @@
 import "./styles.css";
-import { Link, Route, Routes } from "react-router-dom";
-import Join from "../Join/Join";
+import { Link } from "react-router-dom";
 
 function Navbar(){
     return (
