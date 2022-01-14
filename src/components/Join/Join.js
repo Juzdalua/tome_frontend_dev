@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import "./styles.css";
 import {joinUser} from "../../redux/users/actionCreator"
+import { useNavigate } from "react-router-dom";
 
 const Join = (props) => {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
 
     const [email, setEmail] = useState("");
@@ -33,16 +35,13 @@ const Join = (props) => {
         let body = {
             email, password, password2, username
         };
-
-        const response = await dispatch(joinUser(body));
-        if(response.payload.joinSuccess)
-            props.history.push("/login");
-        // dispatch(joinUser(body))
-        // .then(response => {
-        //     if(response.payload.joinSuccess){
-        //         props.history.push("/login")
-        //     }
-        // });
+        
+        const response = await dispatch(joinUser(body));        
+        // console.log(response)
+        if(response.status = 200)
+            navigate("/login")
+            
+        
         
     };
     return (
