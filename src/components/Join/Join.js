@@ -70,7 +70,8 @@ const Join = (props) => {
                 <input type="password" placeholder="비밀번호를 입력하세요." value={password} onChange={onPasswordHandler}/>
                 <input id="password2" type="password" placeholder="비밀번호를 다시 입력하세요." value={password2} onChange={onPassword2Handler}/>
                 <input id="username" type="text" placeholder="닉네임을 입력하세요." value={username} onChange={onUsernameHandler}/>
-                <button type="submit" disabled={join} >가입하기</button>
+                {/* <button type="submit" disabled={join} >가입하기</button> */}
+                <button type="submit"  >가입하기</button>
             </form>      
         </div>
     );
