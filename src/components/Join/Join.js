@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import "./styles.css";
 import {joinUser, joinUserValid} from "../../redux/users/actionCreator"
@@ -12,16 +12,29 @@ const Join = (props) => {
     const [password, setPassword] = useState("");
     const [password2, setPassword2] = useState("");
     const [username, setUsername] = useState("");
-    const [join, setJoin] = useState(true);    
-    const cnt = 0;
+    const [join, setJoin] = useState(true);   
+    const [validEmail, setvalidEmail] = useState(false);
+    const [validPassword, setValidPassword] = useState(false);
+    const [validUsername, setValidUsername] = useState(false);
+    
 
     const onEmailHandler = (event) => {
         setEmail(event.target.value);
         const email = document.querySelector("#email");
         email.onblur = async() => {
-            //email 중복검사
-            const response = await dispatch(joinUserValid({email}));
-
+            //email 중복검사     
+            try {
+                const response = await dispatch(joinUserValid({email: email.value}));
+                if(response){
+                    if(response.status === 200)
+                        setvalidEmail(true);
+                }
+            } catch (error) {
+                console.log(error)
+                alert("Email이 이미 존재합니다.");
+                setvalidEmail(false);
+                return ;
+            }       
         };
     };
     const onPasswordHandler = (event) => {
@@ -29,16 +42,34 @@ const Join = (props) => {
     };
     const onPassword2Handler = (event) => {
         setPassword2(event.target.value);
-        const password2 = document.querySelector("#password2");
-        password2.onblur = () => {
+        const password2_html = document.querySelector("#password2");        
+        password2_html.onblur = () => {            
             //password 유효성 검사
+            if(password === password2_html.value){                
+                setValidPassword(true);                
+            }else{
+                alert("비밀번호가 다릅니다.");
+                setValidPassword(false); 
+            } //if
+            
         }
     };
     const onUsernameHandler = (event) => {
         setUsername(event.target.value);
         const username = document.querySelector("#username");
-        username.onblur = () => {
+        username.onblur = async () => {
             //username 중복검사
+            try {
+                const response = await dispatch(joinUserValid({username: username.value}));
+                if(response){
+                    if(response.status === 200)
+                        setValidUsername(true);
+                }
+            } catch (error) {
+                alert("닉네임이 이미 존재합니다.");
+                setValidUsername(false);
+                return ;
+            }   
         };
     };
 
@@ -58,20 +89,21 @@ const Join = (props) => {
             navigate("/login");
     };
 
-    if(cnt === 3)
-        setJoin(false);
+    useEffect( () => {
+        if(validEmail && validPassword && validUsername)
+            setJoin(false);
+    }, [validEmail, validPassword, validUsername]);
     
-
 
     return (
         <div className="join-div">
             <form onSubmit={onSubmit} className="join-form">                
+                <input id="username" type="text" placeholder="닉네임을 입력하세요." value={username} onChange={onUsernameHandler}/>
                 <input id="email" type="email" placeholder="E-Mail을 입력하세요" value={email} onChange={onEmailHandler}/>                
                 <input type="password" placeholder="비밀번호를 입력하세요." value={password} onChange={onPasswordHandler}/>
-                <input id="password2" type="password" placeholder="비밀번호를 다시 입력하세요." value={password2} onChange={onPassword2Handler}/>
-                <input id="username" type="text" placeholder="닉네임을 입력하세요." value={username} onChange={onUsernameHandler}/>
-                {/* <button type="submit" disabled={join} >가입하기</button> */}
-                <button type="submit"  >가입하기</button>
+                <input id="password2" type="password" placeholder="비밀번호를 다시 입력하세요." value={password2} onChange={onPassword2Handler}/>                
+                <button type="submit" disabled={join} >가입하기</button>
+                {/* <button type="submit"  >가입하기</button> */}
             </form>      
         </div>
     );
