@@ -4,7 +4,7 @@ import "./styles.css";
 import {joinUser, joinUserValid} from "../../redux/users/actionCreator"
 import { useNavigate } from "react-router-dom";
 
-const Join = (props) => {
+const Join = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -22,19 +22,15 @@ const Join = (props) => {
         setEmail(event.target.value);
         const email = document.querySelector("#email");
         email.onblur = async() => {
-            //email 중복검사     
-            try {
-                const response = await dispatch(joinUserValid({email: email.value}));
-                if(response){
-                    if(response.status === 200)
-                        setvalidEmail(true);
-                }
-            } catch (error) {
-                console.log(error)
-                alert("Email이 이미 존재합니다.");
+            //email 중복검사                 
+            const response = await dispatch(joinUserValid({email: email.value}));
+            
+            if(response.status === 200)
+                setvalidEmail(true);
+            else{
                 setvalidEmail(false);
-                return ;
-            }       
+                return alert(response.data.message);
+            };     
         };
     };
     const onPasswordHandler = (event) => {
@@ -59,17 +55,15 @@ const Join = (props) => {
         const username = document.querySelector("#username");
         username.onblur = async () => {
             //username 중복검사
-            try {
-                const response = await dispatch(joinUserValid({username: username.value}));
-                if(response){
-                    if(response.status === 200)
-                        setValidUsername(true);
-                }
-            } catch (error) {
-                alert("닉네임이 이미 존재합니다.");
+        
+            const response = await dispatch(joinUserValid({username: username.value}));
+            
+            if(response.status === 200)
+                setValidUsername(true);
+            else{
                 setValidUsername(false);
-                return ;
-            }   
+                return alert("닉네임이 이미 존재합니다.");
+            };
         };
     };
 
@@ -84,9 +78,11 @@ const Join = (props) => {
         };
         
         const response = await dispatch(joinUser(body));        
-        // console.log(response)
-        if(response.status = 200)
+        
+        if(response.status === 200)
             navigate("/login");
+        else
+            return alert(response.data.meesage);
     };
 
     useEffect( () => {
