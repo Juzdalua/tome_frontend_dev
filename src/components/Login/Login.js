@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import {loginUser} from "../../redux/users/actionCreator"
 
 const Login = () => {
@@ -10,7 +9,6 @@ const Login = () => {
     const [emailValid, setEmailValid] = useState(false);
     const [passwordValid, setPasswordValid] = useState(false);
     const dispatch = useDispatch();
-    const navigate = useNavigate();
 
     const onEmailHandler = (event) => {
         setEmail(event.target.value);
@@ -39,8 +37,9 @@ const Login = () => {
         
         // email or password fail
         if(response.status === 400)
-            return alert(response.data.message);
-        navigate("/");
+            return alert(response.data.message);        
+        
+        window.location.href = '/'
     };
 
     useEffect( ()=> {

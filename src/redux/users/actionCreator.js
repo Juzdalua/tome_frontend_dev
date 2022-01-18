@@ -1,11 +1,12 @@
 import actions from "./actions";
-import { instance } from "../../Axios";
+import { ssoInstance } from "../../utility/Axios";
+import { removeItem, setItem } from "../../utility/localStorage";
 
 //create user
 export const joinUser = (data) => {  
     return async (dispatch) => {
         try {
-            const response = await instance.post(`/api/users/join/create`, data);
+            const response = await ssoInstance.post(`/api/users/join/create`, data);
             // console.log(response)
             dispatch({
                 type: actions.JOIN_USER,
@@ -22,7 +23,7 @@ export const joinUser = (data) => {
 export const joinUserValid = (data) => {
     return async (dispatch) => {
         try {
-            const response = await instance.post('api/users/join/valid', data);
+            const response = await ssoInstance.post('api/users/join/valid', data);
             dispatch({
                 type: actions.JOIN_USER_VALID,
                 payload: response
@@ -39,14 +40,39 @@ export const joinUserValid = (data) => {
 export const loginUser = (data) => {
     return async (dispatch) => {        
         try {
-            const response = await instance.post('api/users/login', data);            
+            const response = await ssoInstance.post('api/users/login', data);            
             dispatch({
                 type: actions.LOGIN_USER,
                 payload: response
             });            
+            const user = response.data.data;
+            setItem("token", user.token);
+            setItem("user", user);
+
             return response;
         } catch (error) {
             return error.response;
         };
+    };
+};
+
+//logout
+export const logoutUser = () => {
+    return async (dispatch) => {
+        try {
+            removeItem("token");
+            removeItem("user");
+            
+            dispatch({
+                type:actions.LOGOUT_SUCCESS,
+                payload: null,            
+            });    
+        } catch (error) {
+            dispatch({
+                type:actions.LOGOUT_ERROR,
+                payload: null,            
+            });    
+        }
+        
     };
 };
