@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import {loginUser} from "../../redux/users/actionCreator"
+import {useNavigate} from "react-router-dom"
 
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -9,6 +10,7 @@ const Login = () => {
     const [emailValid, setEmailValid] = useState(false);
     const [passwordValid, setPasswordValid] = useState(false);
     const dispatch = useDispatch();
+    const navigator = useNavigate();
 
     const onEmailHandler = (event) => {
         setEmail(event.target.value);
@@ -39,7 +41,8 @@ const Login = () => {
         if(response.status === 400)
             return alert(response.data.message);        
         
-        window.location.href = '/'
+        // window.location.href = '/'
+        navigator("/");
     };
 
     useEffect( ()=> {

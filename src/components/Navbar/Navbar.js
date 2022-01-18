@@ -1,9 +1,9 @@
 import "./styles.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { getItem, removeItem } from "../../utility/localStorage";
 
 function Navbar(props){
-    
+    const navigator = useNavigate();
     const LoginButton = () => {
         return (
             <Link to="/login">로그인</Link>
@@ -19,8 +19,9 @@ function Navbar(props){
     const onLogoutHandler = () => {
         removeItem('token');
         removeItem('user');
-                
-        window.location.href = '/'
+           
+        navigator("/")
+        // window.location.href = '/'
         return true;
     };
 
@@ -30,8 +31,8 @@ function Navbar(props){
                 <Link to="/">오늘의 메모</Link>
             </div>
             <div className="nav-bar__member">
-                {getItem("user")=== null ? <LoginButton /> : <LogoutButton />}                
-                <Link to="/join">회원가입</Link>            
+                {getItem("user") === null ? <LoginButton /> : <LogoutButton />}                
+                {getItem("user") === null ? <Link to="/join">회원가입</Link> : null}                           
             </div>
             
         </div>
