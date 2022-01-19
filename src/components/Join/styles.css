@@ -33,3 +33,14 @@ button{
 button:active{
     transform: scale(0.98);
 }
+
+
+.social-kakao{
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+    
+}
+.social-kakao:active{
+    transform: scale(0.98);
+}

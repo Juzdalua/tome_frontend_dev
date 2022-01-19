@@ -1,13 +1,14 @@
 import actions from "./actions";
 import { ssoInstance } from "../../utility/Axios";
 import { removeItem, setItem } from "../../utility/localStorage";
+import axios from "axios";
 
 //create user
 export const joinUser = (data) => {  
     return async (dispatch) => {
         try {
             const response = await ssoInstance.post(`/api/users/join/create`, data);
-            // console.log(response)
+            
             dispatch({
                 type: actions.JOIN_USER,
                 payload: response
@@ -30,7 +31,7 @@ export const joinUserValid = (data) => {
             });            
             return response;    
         } catch (error) {
-            console.log(error.response)
+            
             return error.response;
         };        
     };
@@ -56,23 +57,26 @@ export const loginUser = (data) => {
     };
 };
 
-//logout
-export const logoutUser = () => {
+//login kakao callback with code
+export const loginKakao = () => {
     return async (dispatch) => {
-        try {
-            removeItem("token");
-            removeItem("user");
-            
-            dispatch({
-                type:actions.LOGOUT_SUCCESS,
-                payload: null,            
-            });    
-        } catch (error) {
-            dispatch({
-                type:actions.LOGOUT_ERROR,
-                payload: null,            
-            });    
-        }
+        const url = new URL(window.location.href);
+        const code = url.searchParams.get("code");
         
+        try {
+            const response = await ssoInstance.post('api/users/login/kakao', code);
+            dispatch({
+                type: actions.LOGIN_KAKAO,
+                payload:response
+            });
+            
+            const user = response.data.data;
+            setItem("token", user.token);
+            setItem("user", user);
+
+            return response;
+        } catch (error) {
+        return error.response  
+        };
     };
 };
