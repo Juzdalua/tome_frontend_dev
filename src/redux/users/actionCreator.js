@@ -58,25 +58,50 @@ export const loginUser = (data) => {
 };
 
 //login kakao callback with code
-export const loginKakao = () => {
+export const getKakaoToken = () => {
     return async (dispatch) => {
         const url = new URL(window.location.href);
         const code = url.searchParams.get("code");
+        const grant_type = "authorization_code";
+        const REDIRECT_URI = "http://localhost:3001/login/kakao"
         
         try {
-            const response = await ssoInstance.post('api/users/login/kakao', code);
+            const response = await axios.post(
+                `https://kauth.kakao.com/oauth/token?grant_type=${grant_type}&client_id=${process.env.REACT_APP_REST_API_KEY}&redirect_uri=${REDIRECT_URI}&code=${code}`,
+                {
+                    headers: {
+                        "Content-type": "application/x-www-form-urlencoded;charset=utf-8"
+                    },
+                });
             dispatch({
-                type: actions.LOGIN_KAKAO,
+                type: actions.LOGIN_KAKAO_TOKEN,
                 payload:response
             });
             
-            const user = response.data.data;
-            setItem("token", user.token);
-            setItem("user", user);
-
             return response;
         } catch (error) {
-        return error.response  
+            return error.response  ;
         };
+    };
+};
+
+// get user and jwt by kakao token
+export const loginKakao = (response) => {
+    return async (dispatch) => {                    
+        const tokenData = {kakao_token: response.data};        
+        try{
+            const userResponse = await ssoInstance.post('/api/users/login/kakao', tokenData);
+            dispatch({
+                type: actions.LOGIN_KAKAO_USER,
+                payload: userResponse,
+            });
+            
+            setItem("token", userResponse.token);
+            setItem("user", userResponse);
+            
+            return userResponse;
+        } catch(error){
+            return error.response;
+        }; 
     };
 };

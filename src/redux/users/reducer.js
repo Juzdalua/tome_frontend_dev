@@ -27,7 +27,16 @@ const userReducer = (state={}, action) => {
                 ...state,
                 error:action.error,
             };
-        
+        case actions.LOGIN_KAKAO_TOKEN:
+            return {
+                ...state,
+                payload:action.payload,
+            };
+        case actions.LOGIN_KAKAO_USER:
+            return {
+                ...state,
+                payload:action.payload,
+            };   
             
             
                 

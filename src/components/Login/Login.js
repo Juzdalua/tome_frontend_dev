@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import {loginUser} from "../../redux/users/actionCreator"
+import {loginUser, } from "../../redux/users/actionCreator"
 import {useNavigate} from "react-router-dom"
 
 const Login = () => {
@@ -50,11 +50,11 @@ const Login = () => {
         navigator("/");
     };
 
-    const onKakaoLoginHandler = async () => {
-        // const REDIRECT_URI = "http://localhost:3001/login/kakao"
-        const REDIRECT_URI = "http://localhost:4001/api/users/login/kakao"
-                
+    const onKakaoLoginHandler = async () => {       
+        // const REDIRECT_URI = "http://localhost:4001/api/users/login/kakao"                
+        const REDIRECT_URI = "http://localhost:3001/login/kakao"
         window.location.href=`https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`; 
+        
     };
 
     return (
