@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { removeItem, getItem} from "../../utility/localStorage";
 import "./styles.css";
 
 
@@ -6,6 +7,12 @@ function Home(){
     const [loading, setLoding] = useState(true);
     const [toDo, setToDo] = useState("");
     const [toDos, setToDos] = useState([]);
+
+    // useEffect(() => {        
+    //     removeItem('user');
+    //     removeItem('token');
+    //     removeItem('kakao_token');
+    // },[]);
 
     const onChange = (event) => {
         setToDo(event.target.value);        

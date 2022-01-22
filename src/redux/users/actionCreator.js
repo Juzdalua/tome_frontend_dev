@@ -1,6 +1,6 @@
 import actions from "./actions";
 import { ssoInstance } from "../../utility/Axios";
-import { removeItem, setItem } from "../../utility/localStorage";
+import { getItem, removeItem, setItem } from "../../utility/localStorage";
 import axios from "axios";
 
 //create user
@@ -96,12 +96,34 @@ export const loginKakao = (response) => {
                 payload: userResponse,
             });
             
-            setItem("token", userResponse.token);
-            setItem("user", userResponse);
+            setItem("kakao_token", userResponse.data.data.kakao_token);
+            setItem("token", userResponse.data.data.token);
+            setItem("user", userResponse.data.data);
             
             return userResponse;
         } catch(error){
             return error.response;
         }; 
+    };
+};
+
+//logout Kakao
+export const logoutKakao = () => {
+    return async (dispatch) => {
+        try {  
+            //logout kakao user                                  
+            const response = await ssoInstance.post('/api/users/logout/kakao',getItem('kakao_token'));
+            dispatch({
+                type: actions.LOGOUT_KAKAO_USER,
+                payload: response
+            });
+            
+            console.log(response)
+            removeItem("kakao_token");
+            
+           return response;
+        } catch (error) {
+            return error.response;
+        };
     };
 };

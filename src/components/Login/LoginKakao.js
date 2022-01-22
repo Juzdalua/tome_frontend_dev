@@ -12,8 +12,13 @@ const LoginKakao = () =>{
         
         if(response.status === 200){
             const userResponse = await dispatch(loginKakao(response));
+            
             if(userResponse.status === 200)
-                navigator("/");
+                return navigator("/");
+            else if(userResponse.status === 400){
+                alert(userResponse.data.message);
+                return navigator("/login");
+            }//if
         };
     },[]);
 
