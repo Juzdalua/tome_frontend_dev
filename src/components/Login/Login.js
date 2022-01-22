@@ -19,15 +19,19 @@ const Login = () => {
 
     const onEmailHandler = (event) => {
         setEmail(event.target.value);
-        if(email !== "")
+        const emailValue = document.querySelector("#email").value;
+        if(emailValue !== "")
             setEmailValid(true);
         else
             setEmailValid(false);
+        
     };
 
     const onPasswordHandler = (event) => {
         setPassword(event.target.value);
-        if(password !== "")
+        const passwordValue = document.querySelector("#password").value;
+        
+        if(passwordValue !== "")
             setPasswordValid(true);
         else
             setPasswordValid(false);
@@ -53,15 +57,14 @@ const Login = () => {
     const onKakaoLoginHandler = async () => {       
         // const REDIRECT_URI = "http://localhost:4001/api/users/login/kakao"                
         const REDIRECT_URI = "http://localhost:3001/login/kakao"
-        window.location.href=`https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`; 
-        
+        window.location.href=`https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;         
     };
 
     return (
         <div className="join-div">
             <form onSubmit={onSubmit} className="join-form">                                
                 <input id="email" type="email" placeholder="E-Mail을 입력하세요" value={email} onChange={onEmailHandler} />                
-                <input type="password" placeholder="비밀번호를 입력하세요." value={password} onChange={onPasswordHandler} />                
+                <input id="password" type="password" placeholder="비밀번호를 입력하세요." value={password} onChange={onPasswordHandler} />                
                 <button type="submit" disabled={join} >로그인</button>                                
                 <div className="social-kakao" onClick={onKakaoLoginHandler}><img src={process.env.PUBLIC_URL+"img/kakao_login_medium_wide.png"}/></div>
             </form>      

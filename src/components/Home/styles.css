@@ -4,6 +4,9 @@
     flex-direction: column;
     align-items: center;    
 }
+.toDoTime{
+    margin-bottom: 20px;
+}
 .toDo{
     padding: 15px;
     border-radius: 5px;
@@ -12,6 +15,15 @@
     width: 70%;
     box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
     margin-bottom: 20px;
+    resize: none;
+    height: 200px;
+}
+.toDoList{
+    width: 80%;
+}
+.toDoList-li{
+    display: flex;
+    justify-content: space-between;
 }
 .toDoBtn{
     border: none;

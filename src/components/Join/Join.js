@@ -90,6 +90,11 @@ const Join = () => {
             setJoin(false);
     }, [validEmail, validPassword, validUsername]);
     
+    const onKakaoLoginHandler = async () => {       
+        // const REDIRECT_URI = "http://localhost:4001/api/users/login/kakao"                
+        const REDIRECT_URI = "http://localhost:3001/login/kakao"
+        window.location.href=`https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;         
+    };
 
     return (
         <div className="join-div">
@@ -100,6 +105,7 @@ const Join = () => {
                 <input id="password2" type="password" placeholder="비밀번호를 다시 입력하세요." value={password2} onChange={onPassword2Handler}/>                
                 <button type="submit" disabled={join} >가입하기</button>
                 {/* <button type="submit"  >가입하기</button> */}
+                <div className="social-kakao" onClick={onKakaoLoginHandler}><img src={process.env.PUBLIC_URL+"img/kakao_login_medium_wide.png"}/></div>
             </form>      
         </div>
     );
