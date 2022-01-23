@@ -4,34 +4,29 @@ import { getItem } from "../../utility/localStorage";
 import { getMemoWithUser } from "../../redux/memo/actionCreator";
 
 const MemoList = () => {
-    const [memo, setMemo] = useState([]);    
+    var [memo, setMemo] = useState([]);    
     const dispatch = useDispatch();
-    
-    useEffect( () => {
+           
+    useEffect( () => {  
         getAllMemo();
     },[]);
-
-    let response;
+    
     const getAllMemo = async () => {
         // get memo list with user
         const body = {
             user_id : getItem('user').id
         };        
-        response = await dispatch(getMemoWithUser(body));        
+        let response = await dispatch(getMemoWithUser(body));        
         console.log(response.data.data);
-
-        setMemo( () => response.data.data);
+        setMemo(() => response.data.data);
         console.log(memo)
     };
-
-
-    
 
     return (
         
         <div>            
-            {memo.forEach( (item, idx) => {
-                <span key={idx}>{item.createdAt}</span>
+            {memo.map( memo => {
+                <span key={memo.id}>memo.memo</span>
             })}
         </div>
     );
