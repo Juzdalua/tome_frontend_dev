@@ -1,0 +1,23 @@
+.memo-container{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    padding: 20px;
+}
+
+.memo-container__item{ 
+    box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+    width: 80%;
+    min-height: 150px;
+    margin-bottom: 30px;    
+    border-radius: 10px;
+}
+
+.memo-container__time{
+    margin-bottom: 20px;
+    padding: 10px;
+}
+.memo-container__memo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

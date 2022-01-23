@@ -51,8 +51,8 @@ function Home(){
             };
             const response = await dispatch(writeMemo(body));
             if(response.status === 200)
-                // navigator("/");
-                window.location.href = '/'
+                navigator("/");
+                // window.location.href = '/'
         };
         
     };
