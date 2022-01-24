@@ -18,6 +18,26 @@
     resize: none;
     height: 200px;
 }
+.toDo__img-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+    padding: 10px;
+    border-radius: 5px;
+}
+.toDo__img-item{    
+    all: unset;    
+    margin-left: 10px;    
+    width: 190px;
+    padding: 10px;    
+}
+.toDo__img-preview{
+    width: 150px;
+    height: 150px;
+    box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
 .toDoList{
     width: 80%;
 }
@@ -32,6 +52,7 @@
     box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
     border-radius: 5px;
     background-color: rgba(0, 0, 0, 0.08);
+    margin-top: 20px;
 }
 .toDoBtn:active{
     transform: scale(0.98);

@@ -12,6 +12,8 @@ function Home(){
     const [loading, setLoding] = useState(true);
     const [toDo, setToDo] = useState("");
     const [toDos, setToDos] = useState([]);
+    const [image, setImage] = useState()
+    const [imgPreview, setImgPreview] = useState("");    
     // const [time, setTime] = useState(moment()); //useState 훅을 통해 time 값 디폴트 설정
     
     const dispatch = useDispatch();
@@ -35,38 +37,66 @@ function Home(){
         setToDo(event.target.value);        
     };
 
+    let uploadImage;
+    const onImageHandler = (event) => {        
+        setImage(() => event.target.files[0]);
+
+        //set preview image
+        const objectUrl = URL.createObjectURL(event.target.files[0])
+        setImgPreview(objectUrl);
+    };
+
     const onSubmit = async (event) => {        
         event.preventDefault();
         if(toDo === "")
             return;
         
         setToDos( currentArr => [toDo, ...currentArr]);
-        setToDo("");        
+        setToDo("");   
+        setImgPreview("");     
         document.querySelector(".toDo").focus();        
+                
         
-        if(getItem('user')){
-            const body = {
-                toDo: toDo,
-                user: getItem('user')
-            };
+        if(getItem('user')){                
+            let body = new FormData();
+            body.append("toDo", toDo);
+            body.append("user", getItem('user'));
+            if (image) 
+                body.append("images", image);
+            
+            // body = {
+            //     toDo: toDo,
+            //     file: image,
+            //     // file: image.length > 0 ? image : uploadImage,                
+            //     user: getItem('user')
+            // };                
+            console.log(body)
+            
             const response = await dispatch(writeMemo(body));
             if(response.status === 200)
                 navigator("/");
                 // window.location.href = '/'
-        };
+        };              
         
     };
-
-    useEffect(() => {
-        // onLoadTime();
-        
-    }, [onSubmit]);
+    useEffect(() => {   
+             
+    }, [image])
 
     return (
         <div>
-            <form className="toDoForm" onSubmit={onSubmit}>                
+            <form id="toDoForm" className="toDoForm" onSubmit={onSubmit}>
                 {/* <span className="toDoTime">{time.format('YYYY년 MM월 DD일, HH시 mm분 ss초')}</span> */}
-                <textarea className="toDo" onChange={onChange} value={toDo} type="text" placeholder="메모를 입력하세요." />
+                <textarea className="toDo" onChange={onChange} value={toDo} type="text" placeholder="메모를 입력하세요." />                
+                <div className="toDo__img-container">
+                    <label htmlFor="img">사진 추가하기</label>
+                    <input className="toDo__img-item" id="img" type="file" accept="image/*" onChange={onImageHandler}/>
+                    <div className="toDo__img-preview">
+                        {imgPreview === '' ? null : 
+                            <img className="toDo__img-preview" src={imgPreview} />
+                        }
+                    </div>
+                </div>
                 <button className="toDoBtn">추가하기</button>
             </form>
             <hr/>

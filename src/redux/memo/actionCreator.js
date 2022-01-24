@@ -1,5 +1,5 @@
 import actions from "../memo/actions";
-import { ssoInstance } from "../../utility/Axios";
+import { ssoInstance, ssoFileInstance } from "../../utility/Axios";
 
 //create memo
 export const writeMemo = (data) => {
