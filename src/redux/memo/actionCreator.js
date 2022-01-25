@@ -1,10 +1,11 @@
 import actions from "../memo/actions";
-import { ssoInstance, ssoFileInstance } from "../../utility/Axios";
+import { ssoInstance } from "../../utility/Axios";
 
 //create memo
 export const writeMemo = (data) => {
     return async(dispatch) => {
         try {
+            console.log(data)
             const response = await ssoInstance.post('api/memo/create', data);
             dispatch({
                 type: actions.CREATE_MEMO,

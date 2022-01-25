@@ -39,7 +39,7 @@ function Home(){
 
     let uploadImage;
     const onImageHandler = (event) => {        
-        setImage(() => event.target.files[0]);
+        setImage(()=>event.target.files[0]);
 
         //set preview image
         const objectUrl = URL.createObjectURL(event.target.files[0])
@@ -57,21 +57,22 @@ function Home(){
         document.querySelector(".toDo").focus();        
                 
         
-        if(getItem('user')){                
-            let body = new FormData();
-            body.append("toDo", toDo);
-            body.append("user", getItem('user'));
-            if (image) 
-                body.append("images", image);
-            
-            // body = {
-            //     toDo: toDo,
-            //     file: image,
-            //     // file: image.length > 0 ? image : uploadImage,                
-            //     user: getItem('user')
-            // };                
-            console.log(body)
-            
+        if(getItem('user')){              
+            let body;
+            // body = new FormData();
+            // body.append("toDo", toDo);
+            // body.append("user",  getItem('user'));
+            // if (image) 
+            //     body.append("images", image);
+            // for (const [key, value] of body.entries()) 
+            //     console.log(key, value)  
+                        
+            body = {
+                toDo: toDo,
+                images: image ? image : null,                
+                user: getItem('user')
+            };              
+                        
             const response = await dispatch(writeMemo(body));
             if(response.status === 200)
                 navigator("/");
@@ -80,12 +81,12 @@ function Home(){
         
     };
     useEffect(() => {   
-             
+        
     }, [image])
 
     return (
         <div>
-            <form id="toDoForm" className="toDoForm" onSubmit={onSubmit}>
+            <form id="toDoForm" className="toDoForm" onSubmit={onSubmit} encType="multipart/form-data" >
                 {/* <span className="toDoTime">{time.format('YYYY년 MM월 DD일, HH시 mm분 ss초')}</span> */}
                 <textarea className="toDo" onChange={onChange} value={toDo} type="text" placeholder="메모를 입력하세요." />                
                 <div className="toDo__img-container">

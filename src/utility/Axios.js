@@ -20,8 +20,7 @@ export const ssoInstance = axios.create({
 // Add a request interceptor
 ssoInstance.interceptors.request.use( (config) => {
     config.headers.Authorization = `${getItem('token')}`;       
-    // Do something before request is sent
-    console.log(config)
+    // Do something before request is sent    
     return config;
 }, (error) => {    
     // Do something with request error
