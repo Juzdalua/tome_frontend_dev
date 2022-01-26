@@ -18,6 +18,13 @@
 }
 .memo-container__memo{
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 10px 0;
+}
+
+.memo-container__memo > img{
+    border-radius: 5px;
+    margin-top: 10px;
 }

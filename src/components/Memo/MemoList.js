@@ -18,18 +18,14 @@ const MemoList = () => {
         const body = {
             user_id : getItem('user').id
         };        
-        response = await dispatch(getMemoWithUser(body));        
-        console.log(response.data.data);
-        // setMemo(prevState => ([...prevState, response.data.data]));
-        setMemo( () => response.data.data)
-        
+        response = await dispatch(getMemoWithUser(body));   
+        // setMemo(prevState => ([...prevState, response.data.data]));        
+        setMemo( () => response.data.data)       
     };
 
     useEffect(() => {        
         // todo for memo change.                    
-        if(memo.length>0){
-            console.log(memo);   
-        }
+        
     }, [memo]);
 
     return (        
@@ -42,10 +38,12 @@ const MemoList = () => {
                         </div>
                         <div className="memo-container__memo">
                             <span>{memo.memo}</span>
+                            {memo.images !== "" ? <img src={memo.images[0].thumbnail_path} alt=""/>
+                            : null}
                         </div>
                     </div>
                 )}) 
-            : <span>Loading...</span>
+            : <span>등록된 메모가 없습니다.</span>
             }            
         </div>  
     );

@@ -59,30 +59,32 @@ function Home(){
         
         if(getItem('user')){              
             let body;
-            // body = new FormData();
-            // body.append("toDo", toDo);
-            // body.append("user",  getItem('user'));
-            // if (image) 
-            //     body.append("images", image);
-            // for (const [key, value] of body.entries()) 
-            //     console.log(key, value)  
-                        
-            body = {
-                toDo: toDo,
-                images: image ? image : null,                
-                user: getItem('user')
-            };              
+
+            body = new FormData();
+            body.append("toDo", toDo);
+            body.append("user",  JSON.stringify(getItem('user')));
+            if (image) 
+                body.append("images", image);
+                                    
+            // body = {
+            //     toDo: toDo,
+            //     images: image ? JSON.stringify(image) : null,                
+            //     user: JSON.stringify(getItem('user'))
+            // };              
                         
             const response = await dispatch(writeMemo(body));
-            if(response.status === 200)
+            if(response.status === 200){
+                
                 navigator("/");
                 // window.location.href = '/'
+            };
+                
         };              
         
     };
     useEffect(() => {   
         
-    }, [image])
+    }, [image]);
 
     return (
         <div>
