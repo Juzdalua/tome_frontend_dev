@@ -89,8 +89,9 @@ function Home(){
 
     return (
         <div>
+            {getItem('user') ? 
             <form id="toDoForm" className="toDoForm" onSubmit={onSubmit} encType="multipart/form-data" >
-                {/* <span className="toDoTime">{time.format('YYYY년 MM월 DD일, HH시 mm분 ss초')}</span> */}
+                {/* <span className="toDoTime">{time.format('YYYY년 MM월 DD일, HH시 mm분 ss초')}</span> */}                
                 <textarea className="toDo" onChange={onChange} value={toDo} type="text" placeholder="메모를 입력하세요." />                
                 <div className="toDo__img-container">
                     <label htmlFor="img">사진 추가하기</label>
@@ -102,7 +103,24 @@ function Home(){
                     </div>
                 </div>
                 <button className="toDoBtn">추가하기</button>
+                : <span></span>                
             </form>
+            :
+            <form id="toDoForm" className="toDoForm" onSubmit={onSubmit} encType="multipart/form-data" >
+                {/* <span className="toDoTime">{time.format('YYYY년 MM월 DD일, HH시 mm분 ss초')}</span> */}                
+                <textarea className="toDo" onChange={onChange} value={toDo} type="text" placeholder="로그인이 필요합니다." readOnly />                
+                <div className="toDo__img-container">
+                    <label htmlFor="img">사진 추가하기</label>
+                    <input className="toDo__img-item" id="img" type="file" accept="image/*" disabled={true} onChange={onImageHandler}/>
+                    <div className="toDo__img-preview">
+                        {imgPreview === '' ? null : 
+                            <img className="toDo__img-preview" src={imgPreview} />
+                        }
+                    </div>
+                </div>
+                <button className="toDoBtn" disabled={true}>추가하기</button>
+                : <span></span>                
+            </form>}
             <hr/>
             {getItem('user') ? 
                 <MemoList />

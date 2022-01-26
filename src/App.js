@@ -7,6 +7,7 @@ import Login from "./components/Login/Login";
 import Logout from "./components/Login/Logout";
 import LoginKakao from "./components/Login/LoginKakao";
 import LogoutKakao from "./components/Login/LogoutKakao";
+import Memo from "./components/Memo/Memo";
 
 function App() {
   
@@ -20,7 +21,8 @@ function App() {
       <Route path="/logout" element={<Logout/>} />      
       <Route path="/join" element={<Join/>} />
       <Route path="/login/kakao" element={<LoginKakao/>} />   
-      <Route path="/logout/kakao" element={<LogoutKakao/>} />   
+      <Route path="/logout/kakao" element={<LogoutKakao/>} />  
+      <Route path="/memo" element={<Memo/>} />   
          
     </Routes>
    </div>

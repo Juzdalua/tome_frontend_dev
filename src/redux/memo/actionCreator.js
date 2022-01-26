@@ -46,4 +46,18 @@ export const deleteMemo = data => {
             return error.response;
         }//
     };
-}
+};
+
+export const downloadExcel = (data) => {
+    return async dispatch => {
+        try {
+            const response = await ssoInstance.post('api/memo/excel', data);
+            dispatch({
+                type: actions.EXCEL_MEMO,
+                payload: response
+            });
+        } catch (error) {
+            return error.response;
+        };
+    };
+};

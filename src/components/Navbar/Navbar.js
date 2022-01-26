@@ -31,6 +31,7 @@ function Navbar(props){
                 <Link to="/">오늘의 메모</Link>
             </div>
             <div className="nav-bar__member">
+                {getItem("user") === null ? null : <Link to="memo">메모 목록</Link>}     
                 {getItem("user") === null ? <LoginButton /> : (getItem("kakao_token") ? <LogoutKakaoButton/> : <LogoutButton />)}                
                 {getItem("user") === null ? <Link to="/join">회원가입</Link> : null}                           
             </div>

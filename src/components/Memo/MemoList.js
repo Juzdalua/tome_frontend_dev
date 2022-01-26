@@ -11,14 +11,13 @@ const MemoList = () => {
     useEffect( () => {  
         getAllMemo();
     },[]);
-
-    let response;        
+     
     const getAllMemo = async () => {
         // get memo list with user
         const body = {
             user_id : getItem('user').id
         };        
-        response = await dispatch(getMemoWithUser(body));   
+        let response = await dispatch(getMemoWithUser(body));   
         // setMemo(prevState => ([...prevState, response.data.data]));        
         setMemo( () => response.data.data)       
     };
@@ -29,13 +28,16 @@ const MemoList = () => {
     }, [memo]);
 
     const onXbuttonHandler = async (event) => {
+        const ok = window.confirm("메모를 삭제하시겠습니까?");
+        if(!ok)
+            return ;
         const id = event.target.parentElement.childNodes[0].id;
         // setMemo( (currentArray) => currentArray.filter((element) => element.id !== id) )
         const body = {
             id: id
         };
         const response = await dispatch(deleteMemo(body));
-        console.log(response);
+        
         if(response.status === 200){
             window.location.href="/";
         };//if

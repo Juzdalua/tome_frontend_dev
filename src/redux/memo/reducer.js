@@ -17,6 +17,12 @@ const memoReducer = (state ={}, action) => {
                 ...state,
                 payload: action.payload
             };      
+        case actions.EXCEL_MEMO:
+            return {
+                ...state,
+                payload: action.payload
+            };   
+            
             
         default:
             return state;
