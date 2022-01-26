@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { getItem } from "../../utility/localStorage";
-import { getMemoWithUser } from "../../redux/memo/actionCreator";
+import { getMemoWithUser, deleteMemo } from "../../redux/memo/actionCreator";
 import "./styles.css";
 
 const MemoList = () => {
@@ -28,13 +28,27 @@ const MemoList = () => {
         
     }, [memo]);
 
+    const onXbuttonHandler = async (event) => {
+        const id = event.target.parentElement.childNodes[0].id;
+        // setMemo( (currentArray) => currentArray.filter((element) => element.id !== id) )
+        const body = {
+            id: id
+        };
+        const response = await dispatch(deleteMemo(body));
+        console.log(response);
+        if(response.status === 200){
+            window.location.href="/";
+        };//if
+    };
+
     return (        
         <div className="memo-container">                        
             {memo.length>0 ? memo.map( (memo, idx) => {
                 return (
                     <div key={idx} className="memo-container__item">
                         <div className="memo-container__time">
-                            <span>{memo.createdAt.substr(0,10)} {memo.createdAt.substr(11,5)}</span>
+                            <span id={memo.id}>{memo.createdAt.substr(0,10)} {memo.createdAt.substr(11,5)}</span>
+                            <span className="memo-container__xbtn" onClick={onXbuttonHandler}>❌</span>
                         </div>
                         <div className="memo-container__memo">
                             <span>{memo.memo}</span>

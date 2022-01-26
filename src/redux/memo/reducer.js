@@ -12,8 +12,12 @@ const memoReducer = (state ={}, action) => {
                 ...state,
                 payload: action.payload
             };   
+        case actions.DELETE_MEMO:
+            return {
+                ...state,
+                payload: action.payload
+            };      
             
-    
         default:
             return state;
     }

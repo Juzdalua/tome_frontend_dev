@@ -14,14 +14,23 @@
 
 .memo-container__time{
     margin-bottom: 20px;
-    padding: 10px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
 }
+.memo-container__xbtn{
+    cursor: pointer;
+}
+
 .memo-container__memo{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 10px 0;
+    margin-bottom: 10px;
 }
 
 .memo-container__memo > img{

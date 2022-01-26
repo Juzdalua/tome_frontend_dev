@@ -37,12 +37,12 @@ function Home(){
         setToDo(event.target.value);        
     };
 
-    let uploadImage;
+    let objectUrl;
     const onImageHandler = (event) => {        
         setImage(()=>event.target.files[0]);
 
         //set preview image
-        const objectUrl = URL.createObjectURL(event.target.files[0])
+        objectUrl = URL.createObjectURL(event.target.files[0])
         setImgPreview(objectUrl);
     };
 
@@ -74,9 +74,10 @@ function Home(){
                         
             const response = await dispatch(writeMemo(body));
             if(response.status === 200){
-                
-                navigator("/");
-                // window.location.href = '/'
+                URL.revokeObjectURL(image);
+                setImage("");
+                // navigator("/");
+                window.location.href = '/'
             };
                 
         };              

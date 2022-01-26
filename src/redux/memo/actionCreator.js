@@ -32,3 +32,18 @@ export const getMemoWithUser = (data) => {
         }
     };
 };
+
+export const deleteMemo = data => {
+    return async dispatch => {
+        try {
+            const response = await ssoInstance.post('api/memo/delete', data);
+            dispatch({
+                type: actions.DELETE_MEMO,
+                payload: response
+            });
+            return response;
+        } catch (error) {
+            return error.response;
+        }//
+    };
+}
