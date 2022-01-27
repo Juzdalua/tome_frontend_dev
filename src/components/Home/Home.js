@@ -8,8 +8,7 @@ import MemoList from "../Memo/MemoList";
 import { useNavigate } from "react-router-dom";
 
 
-function Home(){
-    const [loading, setLoding] = useState(true);
+function Home(){    
     const [toDo, setToDo] = useState("");
     const [toDos, setToDos] = useState([]);
     const [image, setImage] = useState()
@@ -103,9 +102,7 @@ function Home(){
                     </div>
                 </div>
                 <button className="toDoBtn">추가하기</button>
-                : <span></span>                
-            </form>
-            :
+            </form> :            
             <form id="toDoForm" className="toDoForm" onSubmit={onSubmit} encType="multipart/form-data" >
                 {/* <span className="toDoTime">{time.format('YYYY년 MM월 DD일, HH시 mm분 ss초')}</span> */}                
                 <textarea className="toDo" onChange={onChange} value={toDo} type="text" placeholder="로그인이 필요합니다." readOnly />                

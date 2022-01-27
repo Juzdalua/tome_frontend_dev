@@ -62,7 +62,7 @@ function Memo(){
                         <div key={idx} className="memo-detail-container__item">                        
                             <div className="memo-container__time">
                                 <span id={memo.id}>{memo.createdAt.substr(0,10)} {memo.createdAt.substr(11,5)}</span>
-                                <span className="memo-container__xbtn" onClick={onXbuttonHandler}>❌</span>
+                                <button className="memo-container__xbtn" onClick={onXbuttonHandler}>X</button>
                             </div>
                             <div className="memo-container__memo">
                                 <span>{memo.memo}</span>
