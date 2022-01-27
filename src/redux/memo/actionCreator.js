@@ -1,5 +1,6 @@
 import actions from "../memo/actions";
 import { ssoInstance } from "../../utility/Axios";
+import { excelDownload } from "../../utility/FileDownload";
 
 //create memo
 export const writeMemo = (data) => {
@@ -49,13 +50,15 @@ export const deleteMemo = data => {
 };
 
 export const downloadExcel = (data) => {
-    return async dispatch => {
+    return async dispatch => {        
         try {
-            const response = await ssoInstance.post('api/memo/excel', data);
+            const response = await ssoInstance.get('api/memo/excel?user_id='+data.user.id);
             dispatch({
                 type: actions.EXCEL_MEMO,
                 payload: response
             });
+            excelDownload(process.env.REACT_APP_API_URL + response.data.file_path_ + ".xlsx");
+            return response;
         } catch (error) {
             return error.response;
         };
