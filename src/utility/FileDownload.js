@@ -6,7 +6,6 @@ export const excelDownload = async(link, filename) => {
             'Content-Type': 'application/xlsx',
         },
     });
-
     console.log(`### xlsx`, response);
 
     const blob = response.blob();
