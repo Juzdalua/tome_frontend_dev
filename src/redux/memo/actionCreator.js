@@ -57,7 +57,10 @@ export const downloadExcel = (data) => {
                 type: actions.EXCEL_MEMO,
                 payload: response
             });
-            excelDownload(process.env.REACT_APP_API_URL + response.data.file_path_ + ".xlsx");
+            
+            // await excelDownload(response.data.data.file_path_); //axios
+            console.log(process.env.REACT_APP_API_URL+response.data.data.file_path_)
+            await excelDownload(process.env.REACT_APP_API_URL + response.data.data.file_path_, 'MemoList.xlsx'); //fetch
             return response;
         } catch (error) {
             return error.response;
