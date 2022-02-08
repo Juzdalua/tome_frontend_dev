@@ -8,6 +8,7 @@ import Logout from "./components/Login/Logout";
 import LoginKakao from "./components/Login/LoginKakao";
 import LogoutKakao from "./components/Login/LogoutKakao";
 import Memo from "./components/Memo/Memo";
+import MyInfo from "./components/Login/MyInfo";
 
 function App() {
   
@@ -22,7 +23,8 @@ function App() {
       <Route path="/join" element={<Join/>} />
       <Route path="/login/kakao" element={<LoginKakao/>} />   
       <Route path="/logout/kakao" element={<LogoutKakao/>} />  
-      <Route path="/memo" element={<Memo/>} />   
+      <Route path="/memo" element={<Memo/>} />
+      <Route path="/myInfo" element={<MyInfo/>} />   
          
     </Routes>
    </div>

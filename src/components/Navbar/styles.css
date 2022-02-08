@@ -12,6 +12,7 @@
 }
 
 .nav-bar__member > a:first-child, 
+.nav-bar__member a,  
 .nav-bar__member > span{
     margin-right: 10px;
     cursor: pointer;

@@ -1,0 +1,26 @@
+/* MyInfo */
+.myInfo__container{
+    display: flex;    
+    justify-content: center;
+    align-items: center;
+}
+
+.myInfo__container-item{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+    box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+    width: 60%;
+    padding: 30px;
+    font-size: 20px;
+}
+.myInfo__container-item > input:first-child{
+    margin-top: 10px;
+}
+.myInfo__container-item__goback{
+    border-bottom: 1px solid black;
+    margin-top: 30px;
+    opacity: 0.4;
+}
