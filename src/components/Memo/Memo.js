@@ -61,7 +61,7 @@ function Memo(){
                     {/* <button className="memo-detail-excel__btn" onClick={onExcelDownloadHandler}>엑셀로 다운받기</button> */}
                     <button className="memo-detail-excel__btn" onClick={onExcelDownloadHandler} disabled={true}>엑셀로 다운받기<br/>준비중입니다.</button>
                 </div>
-                <div className="memo-detail__calender">
+                <div className="memo-detail__calendar">
                     {/* 달력 자리 */}
                     <span style={{fontSize:100}}>📝</span>
                 </div>
