@@ -15,12 +15,20 @@
     width: 60%;
     padding: 30px;
     font-size: 20px;
+    border-radius: 10px;
 }
-.myInfo__container-item > input:first-child{
-    margin-top: 10px;
+.myInfo__container-item > span:nth-child(2){
+    margin: 20px 0;
 }
 .myInfo__container-item__goback{
     border-bottom: 1px solid black;
     margin-top: 30px;
     opacity: 0.4;
+}
+
+.myInfo__container-item__password{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
 }

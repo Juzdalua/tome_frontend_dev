@@ -53,8 +53,18 @@ function Memo(){
 
     return (                        
         <div>
-            <div className="memo-detail-excel">
-                <button className="memo-detail-excel__btn" onClick={onExcelDownloadHandler}>엑셀로 다운받기</button>
+            <div className="memo-detail">
+                <div className="memo-detail__inshort">                    
+                    <span>{getItem('user').username}님의 메모 갯수: {memo.length}개</span>
+                </div>
+                <div className="memo-detail__excel">
+                    {/* <button className="memo-detail-excel__btn" onClick={onExcelDownloadHandler}>엑셀로 다운받기</button> */}
+                    <button className="memo-detail-excel__btn" onClick={onExcelDownloadHandler} disabled={true}>엑셀로 다운받기<br/>준비중입니다.</button>
+                </div>
+                <div className="memo-detail__calender">
+                    {/* 달력 자리 */}
+                    <span style={{fontSize:100}}>📝</span>
+                </div>
             </div>
             <div className="memo-detail-container">                                    
                 {memo.length>0 ? memo.map( (memo, idx) => {
@@ -62,7 +72,7 @@ function Memo(){
                         <div key={idx} className="memo-detail-container__item">                        
                             <div className="memo-container__time">
                                 <span id={memo.id}>{memo.createdAt.substr(0,10)} {memo.createdAt.substr(11,5)}</span>
-                                <button className="memo-container__xbtn" onClick={onXbuttonHandler}>X</button>
+                                <button className="memo-container__xbtn" onClick={onXbuttonHandler}><img src={process.env.PUBLIC_URL+"img/garbage.png"}></img></button>
                             </div>
                             <div className="memo-container__memo">
                                 <span>{memo.memo}</span>

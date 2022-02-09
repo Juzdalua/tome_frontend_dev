@@ -127,3 +127,19 @@ export const logoutKakao = () => {
         };
     };
 };
+
+// user change password
+export const changePassword = (data) => {
+    return async (dispatch) => {
+        try {
+            const response = await ssoInstance.post('/api/users/changePassword', data);
+            dispatch({
+                type: actions.CHANGE_PASSWORD,
+                payload: response
+            });                
+            return response;            
+        } catch (error) {
+            return error.response;
+        };
+    };
+};

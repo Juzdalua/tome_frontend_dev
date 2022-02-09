@@ -23,9 +23,21 @@
 }
 .memo-container__xbtn{
     all: unset;
-    cursor: pointer;    
-    box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
-    padding: 10px 20px;
+    cursor: pointer;        
+}
+.memo-container__xbtn > img{
+    width: 30px;
+    height: 30px;
+}
+@keyframes rotateGarbage{
+    from{
+        transform: rotateY(180deg);
+    }to{
+        transform: rotateY(360deg);
+    }
+}
+.memo-container__xbtn > img:hover{
+    animation: rotateGarbage 1s ease-in-out infinite;
 }
 
 .memo-container__memo{
@@ -68,8 +80,24 @@
     height: 300px;
 }
 
-.memo-detail-excel{
+.memo-detail{
+    display: flex;
+    justify-content: space-around;
+    margin: 30px 0;
+    width: 100%;
+}
+
+.memo-detail__inshort,
+.memo-detail__excel,
+.memo-detail__calender{
+    border: 1px solid black;
+    width: 30%;
+    padding: 50px 0;
     display: flex;
     justify-content: center;
-    margin: 30px 0;
+    align-items: center;
+}
+
+.memo-detail__excel > button{
+    width: 100%;
 }

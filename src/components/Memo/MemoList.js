@@ -50,7 +50,7 @@ const MemoList = () => {
                     <div key={idx} className="memo-container__item">
                         <div className="memo-container__time">
                             <span id={memo.id}>{memo.createdAt.substr(0,10)} {memo.createdAt.substr(11,5)}</span>
-                            <button className="memo-container__xbtn" onClick={onXbuttonHandler}>X</button>
+                            <button className="memo-container__xbtn" onClick={onXbuttonHandler}><img src={process.env.PUBLIC_URL+"img/garbage.png"}></img></button>
                         </div>
                         <div className="memo-container__memo">
                             <span>{memo.memo}</span>

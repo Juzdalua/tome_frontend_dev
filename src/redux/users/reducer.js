@@ -32,9 +32,13 @@ const userReducer = (state={}, action) => {
                 ...state,
                 payload:action.payload,
             };   
+        case actions.CHANGE_PASSWORD:
+            return {
+                ...state,
+                payload:action.payload,
+            };       
             
             
-                
         default:
             return state;
     }
