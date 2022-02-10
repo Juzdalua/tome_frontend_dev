@@ -116,7 +116,7 @@ function Home(){
                     </div>
                 </div>
                 <button className="toDoBtn" disabled={true}>추가하기</button>
-                : <span></span>                
+                <span></span>                
             </form>}
             <hr/>
             {getItem('user') ? 

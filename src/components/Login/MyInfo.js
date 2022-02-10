@@ -71,7 +71,7 @@ const MyInfo = () => {
             {user ?                 
                 <form className="myInfo__container-item" onSubmit={onPasswordChangeHandler}>    
                     <span>Email: {user.email}</span>
-                    <span>사용자명: {user.username}</span>
+                    <span>닉네임: {user.username}</span>
                     {getItem('kakao_token') ? null : 
                         <div className="myInfo__container-item__password">
                             <input type="password" value={password} onChange={onPasswordHandler} required placeholder="변경할 비밀번호를 입력하세요."/>
