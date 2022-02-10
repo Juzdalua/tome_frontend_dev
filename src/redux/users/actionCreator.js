@@ -67,7 +67,7 @@ export const getKakaoToken = () => {
         
         try {
             const response = await axios.post(
-                `https://kauth.kakao.com/oauth/token?grant_type=${grant_type}&client_id=${process.env.REACT_APP_REST_API_KEY}&redirect_uri=${REDIRECT_URI}&code=${code}`,
+                `https://kauth.kakao.com/oauth/token?grant_type=${grant_type}&client_id=${process.env.REACT_APP_KAKAO_REST_API_KEY}&redirect_uri=${REDIRECT_URI}&code=${code}`,
                 {
                     headers: {
                         "Content-type": "application/x-www-form-urlencoded;charset=utf-8"

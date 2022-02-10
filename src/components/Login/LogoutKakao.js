@@ -22,7 +22,7 @@ const LogoutKakao = () => {
         
         //logout kakao user with kakao account 
         const LOGOUT_REDIRECT_URI = `http://localhost:3001/logout`;
-        window.location.href=`https://kauth.kakao.com/oauth/logout?client_id=${process.env.REACT_APP_REST_API_KEY}&logout_redirect_uri=${LOGOUT_REDIRECT_URI}`; 
+        window.location.href=`https://kauth.kakao.com/oauth/logout?client_id=${process.env.REACT_APP_KAKAO_REST_API_KEY}&logout_redirect_uri=${LOGOUT_REDIRECT_URI}`; 
     };
 
     return (<div>
