@@ -52,7 +52,7 @@ const MyInfo = () => {
         };
 
         const response = await dispatch(changePassword(body));
-        console.log(response);
+        
         if(response.status !== 200){
             alert(response.data.message);
             return ;

@@ -117,8 +117,7 @@ export const logoutKakao = () => {
                 type: actions.LOGOUT_KAKAO_USER,
                 payload: response
             });
-            
-            console.log(response)
+                        
             removeItem("kakao_token");
             
            return response;
