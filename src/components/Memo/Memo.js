@@ -1,11 +1,16 @@
+import DatePicker from "react-datepicker";
+import moment from "moment";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { getItem } from "../../utility/localStorage";
 import { getMemoWithUser, deleteMemo, downloadExcel } from "../../redux/memo/actionCreator";
 import "./styles.css";
+import "react-datepicker/dist/react-datepicker.css";
            
 function Memo(){
-    const [memo, setMemo] = useState([]);       
+    const [memo, setMemo] = useState([]);    
+    const [startDate, setStartDate] = useState();   
+    const [endDate, setEndDate] = useState();   
     const dispatch = useDispatch();
 
     useEffect( () => {  
@@ -51,19 +56,36 @@ function Memo(){
         console.log(response);
     };
 
+    const onHandlerMemosWithDate = (event) => {
+        event.preventDefault();
+        const start_date = moment(startDate).format("YYYY-MM-DD");
+        const end_date = moment(endDate).format("YYYY-MM-DD");
+        
+    };
+
     return (                        
         <div>
             <div className="memo-detail">
                 <div className="memo-detail__inshort">                    
-                    <span>{getItem('user').username}님의 메모 갯수: {memo.length}개</span>
+                    <span className="memo-detail__inshort-item">{getItem('user').username}님의 메모 갯수: {memo.length}개</span>
                 </div>
                 <div className="memo-detail__excel">
                     {/* <button className="memo-detail-excel__btn" onClick={onExcelDownloadHandler}>엑셀로 다운받기</button> */}
                     <button className="memo-detail-excel__btn" onClick={onExcelDownloadHandler} disabled={true}>엑셀로 다운받기<br/>준비중입니다.</button>
                 </div>
                 <div className="memo-detail__calendar">
-                    {/* 달력 자리 */}
-                    <span style={{fontSize:100}}>📝</span>
+                    <div className="memo-detail__calendar-item">
+                        <div className="memo-detail__calendar-item__title">
+                            <span>검색하려는 기간을 입력하세요.</span>
+                        </div>
+                        <div className="memo-detail__calendar-item__data">
+                            <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} placeholderText="날짜를 선택하세요." dateFormat="yyyy.MM.dd" className="start_date"/>
+                            <DatePicker selected={endDate} onChange={(date) => setEndDate(date)} placeholderText="날짜를 선택하세요." dateFormat="yyyy.MM.dd" className="end_date"/>
+                        </div>
+                        <div className="memo-detail__calendar-item__btn">
+                            <button onClick={onHandlerMemosWithDate}>검색</button>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div className="memo-detail-container">                                    

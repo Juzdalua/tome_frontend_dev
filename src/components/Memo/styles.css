@@ -89,15 +89,45 @@
 
 .memo-detail__inshort,
 .memo-detail__excel,
-.memo-detail__calendar{
-    border: 1px solid black;
+.memo-detail__calendar{    
     width: 30%;
     padding: 50px 0;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center;    
+}
+
+.memo-detail__inshort-item,
+.memo-detail__calendar-item{
+    box-shadow: 0 4px 6px rgba(50, 50, 93, 0.11), 0 1px 3px rgba(0, 0, 0, 0.08);
+    padding: 20px;
+    border-radius: 5px;
 }
 
 .memo-detail__excel > button{
     width: 100%;
+}
+
+.memo-detail__calendar-item{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.memo-detail__calendar-item__data{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}
+.start_date,
+.end_date{  
+    min-width: 65%;
+    margin-left: 10px;
+}
+
+.memo-detail__calendar-item__btn > button{
+    width:100%;
+    padding: 15px 30px;
 }
