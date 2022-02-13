@@ -1,11 +1,14 @@
 import DatePicker from "react-datepicker";
+import ko from "date-fns/locale/ko";
 import moment from "moment";
+import "moment-timezone";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { getItem } from "../../utility/localStorage";
 import { getMemoWithUser, deleteMemo, downloadExcel } from "../../redux/memo/actionCreator";
 import "./styles.css";
 import "react-datepicker/dist/react-datepicker.css";
+import { Link } from "react-router-dom";
            
 function Memo(){
     const [memo, setMemo] = useState([]);    
@@ -56,11 +59,27 @@ function Memo(){
         console.log(response);
     };
 
-    const onHandlerMemosWithDate = (event) => {
+    const onHandlerMemosWithDate = async (event) => {
         event.preventDefault();
-        const start_date = moment(startDate).format("YYYY-MM-DD");
-        const end_date = moment(endDate).format("YYYY-MM-DD");
+        const start_date = moment(startDate).tz("Asia/Seoul");
+        const end_date = moment(endDate).tz("Asia/Seoul");
+
+        if(start_date && end_date){
+            if(startDate > endDate){
+                alert("날짜 선택을 잘못 하셨습니다.");
+                return ;
+            }//
+        }//
         
+        const body = {
+            user_id: getItem('user').id,
+            start_date: start_date,
+            end_date: end_date,
+            // start_date: startDate,
+            // end_date: endDate
+        }// body
+        const response = await dispatch(getMemoWithUser(body));
+        setMemo( () => response.data.data);
     };
 
     return (                        
@@ -70,6 +89,7 @@ function Memo(){
                     <span className="memo-detail__inshort-item">{getItem('user').username}님의 메모 갯수: {memo.length}개</span>
                 </div>
                 <div className="memo-detail__excel">
+                    <Link to="/"><span className="memo-detail__excel-goHome">&rarr; 글쓰러 가기</span></Link>
                     {/* <button className="memo-detail-excel__btn" onClick={onExcelDownloadHandler}>엑셀로 다운받기</button> */}
                     <button className="memo-detail-excel__btn" onClick={onExcelDownloadHandler} disabled={true}>엑셀로 다운받기<br/>준비중입니다.</button>
                 </div>
@@ -79,8 +99,8 @@ function Memo(){
                             <span>검색하려는 기간을 입력하세요.</span>
                         </div>
                         <div className="memo-detail__calendar-item__data">
-                            <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} placeholderText="날짜를 선택하세요." dateFormat="yyyy.MM.dd" className="start_date"/>
-                            <DatePicker selected={endDate} onChange={(date) => setEndDate(date)} placeholderText="날짜를 선택하세요." dateFormat="yyyy.MM.dd" className="end_date"/>
+                            <DatePicker maxDate={new Date(moment().format('YYYY-MM-DD'))} locale={ko} selected={startDate} onChange={(date) => setStartDate(date)} placeholderText="날짜를 선택하세요." dateFormat="yyyy.MM.dd" className="start_date"/>
+                            <DatePicker maxDate={new Date(moment().format('YYYY-MM-DD'))} locale={ko} selected={endDate} onChange={(date) => setEndDate(date)} placeholderText="날짜를 선택하세요." dateFormat="yyyy.MM.dd" className="end_date"/>                                                        
                         </div>
                         <div className="memo-detail__calendar-item__btn">
                             <button onClick={onHandlerMemosWithDate}>검색</button>

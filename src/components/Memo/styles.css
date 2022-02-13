@@ -3,6 +3,7 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     padding: 20px;
+    place-items: center;
 }
 
 .memo-container__item{ 
@@ -64,6 +65,7 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     padding: 20px;
+    place-items: center;
 }
 
 .memo-detail-container__item{ 
@@ -104,7 +106,16 @@
     border-radius: 5px;
 }
 
+.memo-detail__excel{
+    display: flex;
+    flex-direction: column;
+}
+.memo-detail__excel-goHome{
+    opacity: 0.4;
+    border-bottom: 1px solid black;
+}
 .memo-detail__excel > button{
+    margin-top: 20px;
     width: 100%;
 }
 
@@ -130,4 +141,55 @@
 .memo-detail__calendar-item__btn > button{
     width:100%;
     padding: 15px 30px;
+}
+
+/* responsive */
+@media screen and (max-width: 1280px){
+    .memo-container{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        padding: 20px;
+    }
+
+    .memo-detail-container{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        padding: 20px;
+    }
+}
+
+@media screen and (max-width: 768px){
+    .memo-container{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        padding: 20px;
+    }
+
+    .memo-detail-container{
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        padding: 20px;
+    }
+
+    .memo-detail__calendar{
+        display: none;
+    }
+}
+
+@media screen and (max-width: 470px){
+    .memo-container{
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        padding: 20px;
+    }
+
+    .memo-detail-container{
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        padding: 20px;
+    }
+
+    .memo-detail__calendar{
+        display: none;
+    }
 }

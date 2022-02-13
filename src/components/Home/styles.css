@@ -57,3 +57,10 @@
 .toDoBtn:active{
     transform: scale(0.98);
 }
+
+/* responsive */
+@media screen and (max-width:768px) {
+    .toDo__img-container > label{
+        display: none;
+    }
+}
