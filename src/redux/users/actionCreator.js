@@ -63,7 +63,7 @@ export const getKakaoToken = () => {
         const url = new URL(window.location.href);
         const code = url.searchParams.get("code");
         const grant_type = "authorization_code";
-        const REDIRECT_URI = "http://localhost:3001/login/kakao"
+        const REDIRECT_URI = `${process.env.REACT_APP_KAKAO_API_URL}/login/kakao`;
         
         try {
             const response = await axios.post(
