@@ -61,8 +61,12 @@ function Memo(){
 
     const onHandlerMemosWithDate = async (event) => {
         event.preventDefault();
-        const start_date = moment(startDate).tz("Asia/Seoul");
-        const end_date = moment(endDate).tz("Asia/Seoul");
+
+        let start_date, end_date = null;
+        if(startDate)
+            start_date = moment(startDate).tz("Asia/Seoul");
+        if(endDate)
+            end_date = moment(endDate).tz("Asia/Seoul");
 
         if(start_date && end_date){
             if(startDate > endDate){
@@ -73,10 +77,10 @@ function Memo(){
         
         const body = {
             user_id: getItem('user').id,
-            start_date: start_date,
-            end_date: end_date,
-            // start_date: startDate,
-            // end_date: endDate
+            // start_date: start_date,
+            // end_date: end_date,
+            start_date: startDate,
+            end_date: endDate
         }// body
         const response = await dispatch(getMemoWithUser(body));
         setMemo( () => response.data.data);
