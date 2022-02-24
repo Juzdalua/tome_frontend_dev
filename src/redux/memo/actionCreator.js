@@ -23,8 +23,7 @@ export const getMemoWithUser = (data) => {
         let query = `user_id=${data.user_id}`;
         query += data.start_date != null ? `&start_date=${data.start_date}` : '';
         query += data.end_date != null ? `&end_date=${data.end_date}` : '';
-        console.log(query)
-
+        
         try {
             const response = await ssoInstance.get(`api/memo/getMemoWithUser?${query}`);
             dispatch({

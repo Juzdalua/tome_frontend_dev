@@ -171,8 +171,12 @@
         padding: 20px;
     }
 
-    .memo-detail__calendar{
+    .memo-detail__excel{
         display: none;
+    }
+
+    .memo-detail__calendar{
+        width: 80%;
     }
 }
 
@@ -189,7 +193,10 @@
         padding: 20px;
     }
 
-    .memo-detail__calendar{
+    .memo-detail__excel{
         display: none;
+    }
+    .memo-detail__calendar{
+        width: 70%;
     }
 }
